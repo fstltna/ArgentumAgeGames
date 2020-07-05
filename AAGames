@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+#!/usr/bin/perl
 
 use warnings;
 use strict;
@@ -10,30 +10,39 @@ package MyApp;
 
 use base 'Wx::App';
 
-sub OnInit {
-  my $self = shift;
+# About Popup
+sub AboutPopup
+{
+}
 
-  my $frame = wxPerl::Frame->new(undef, 'Argentum Age Games');
-  $frame->SetMinSize([320,160]);
-  my $sizer = Wx::BoxSizer->new(&Wx::wxVERTICAL);
+# Main Init
+sub OnInit
+{
+	my $self = shift;
 
-  my $button = wxPerl::Button->new($frame, 'Games');
-  $sizer->Add($button, 2, &Wx::wxEXPAND);
-  my $buttonSync = wxPerl::Button->new($frame, 'Sync');
-  $sizer->Add($buttonSync, 2, &Wx::wxEXPAND);
-  my $button2 = wxPerl::Button->new($frame, 'Quit');
-  $sizer->Add($button2, 1, &Wx::wxEXPAND);
-  Wx::Event::EVT_BUTTON($button, -1, sub {
-    my ($b, $evt) = @_;
-    $b->SetLabel('Clicked');
-    $b->Disable;
-  });
-  Wx::Event::EVT_BUTTON($button2, -1, sub {
-    &Wx::wxTheApp->ExitMainLoop;
-  });
+	my $frame = wxPerl::Frame->new(undef, 'Argentum Age Games');
+	$frame->SetMinSize([320,160]);
+	my $sizer = Wx::BoxSizer->new(&Wx::wxVERTICAL);
 
-  $frame->SetSizer($sizer);
-  $frame->Show;
+	my $button = wxPerl::Button->new($frame, 'Games');
+	$sizer->Add($button, 2, &Wx::wxEXPAND);
+	my $buttonSync = wxPerl::Button->new($frame, 'Sync');
+	$sizer->Add($buttonSync, 2, &Wx::wxEXPAND);
+	my $buttonAbout = wxPerl::Button->new($frame, 'About');
+	$sizer->Add($buttonAbout, 2, &Wx::wxEXPAND);
+	my $button2 = wxPerl::Button->new($frame, 'Quit');
+	$sizer->Add($button2, 1, &Wx::wxEXPAND);
+	Wx::Event::EVT_BUTTON($button, -1, sub {
+		my ($b, $evt) = @_;
+		$b->SetLabel('Clicked');
+		$b->Disable;
+	});
+	Wx::Event::EVT_BUTTON($button2, -1, sub {
+		&Wx::wxTheApp->ExitMainLoop;
+	});
+
+	$frame->SetSizer($sizer);
+	$frame->Show;
 }
 
 MyApp->new->MainLoop;
