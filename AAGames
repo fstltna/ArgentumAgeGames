@@ -115,7 +115,7 @@ sub AboutPopup
 	$frame->SetMinSize([320,160]);
 	my $sizer = Wx::BoxSizer->new(&Wx::wxVERTICAL);
 
-	my $aboutText = wxPerl::TextEntry->new($frame, 'About');
+	my $aboutText = wxPerl::StaticText->new($frame, 'About');
 	$sizer->Add($aboutText);
 	my $buttonAbout = wxPerl::Button->new($frame, 'About');
 	$sizer->Add($buttonAbout, 2, &Wx::wxEXPAND);
