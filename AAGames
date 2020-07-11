@@ -25,6 +25,8 @@ my @ServerList = ();
 my %ServerHost;
 my %ServerPort;
 
+my $InAbout = 0;
+
 #my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel --server=argentumage.gameplayer.club:23456";
 my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel";
 
@@ -148,6 +150,7 @@ This is a game launcher for Argentum Age. It helps you to find games to play.
 	my $buttonDone = wxPerl::Button->new($frame, 'Done');
 	$sizer->Add($buttonDone, 1, &Wx::wxEXPAND);
 	Wx::Event::EVT_BUTTON($buttonDone, -1, sub {
+		$InAbout = 0;
 		$frame->Close;
 	});
 
@@ -182,10 +185,14 @@ sub OnInit
 	});
 	Wx::Event::EVT_BUTTON($buttonAbout, -1, sub {
 		my ($b, $evt) = @_;
-		$b->SetLabel('Clicked');
-		$b->Disable;
-		AboutPopup();
-		$b->Enable;
+		#$b->SetLabel('Clicked');
+		if ($InAbout == 0)
+		{
+			$InAbout = -1;
+			$b->Disable;
+			AboutPopup();
+			$b->Enable;
+		}
 	});
 	Wx::Event::EVT_BUTTON($buttonSync, -1, sub {
 		my ($b, $evt) = @_;
