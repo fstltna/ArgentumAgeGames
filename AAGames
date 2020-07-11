@@ -117,14 +117,10 @@ sub AboutPopup
 
 	my $aboutText = wxPerl::StaticText->new($frame, 'About');
 	$sizer->Add($aboutText);
-	my $buttonAbout = wxPerl::Button->new($frame, 'About');
-	$sizer->Add($buttonAbout, 2, &Wx::wxEXPAND);
+#	my $buttonAbout = wxPerl::Button->new($frame, 'About');
+#	$sizer->Add($buttonAbout, 2, &Wx::wxEXPAND);
 	my $buttonDone = wxPerl::Button->new($frame, 'Done');
 	$sizer->Add($buttonDone, 1, &Wx::wxEXPAND);
-	Wx::Event::EVT_BUTTON($buttonAbout, -1, sub {
-		my ($b, $evt) = @_;
-		PrintDebug("Displaying About Field");
-	});
 	Wx::Event::EVT_BUTTON($buttonDone, -1, sub {
 		$frame->Close;
 	});
