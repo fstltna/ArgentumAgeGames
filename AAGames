@@ -10,9 +10,22 @@ package MyApp;
 
 use base 'Wx::App';
 
+my $DebugOn = "true";
+
 # --- No changes below here
+my $VersionNumber = "1.0.0";
+
 #my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel --server=argentumage.gameplayer.club:23456";
 my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel";
+
+# Print debug info
+sub PrintDebug
+{
+	if ($DebugOn eq "true")
+	{
+		print "$_[0]\n";
+	}
+}
 
 # Display list of games
 sub DisplayGameList
@@ -35,6 +48,7 @@ sub RunGame
 # About Popup
 sub AboutPopup
 {
+	PrintDebug("About to open the About popup");
 }
 
 # Main Init
@@ -64,7 +78,9 @@ sub OnInit
 	Wx::Event::EVT_BUTTON($buttonAbout, -1, sub {
 		my ($b, $evt) = @_;
 		$b->SetLabel('Clicked');
-		#$b->Disable;
+		$b->Disable;
+		AboutPopup();
+		$b->Enable;
 	});
 	Wx::Event::EVT_BUTTON($button2, -1, sub {
 		&Wx::wxTheApp->ExitMainLoop;
