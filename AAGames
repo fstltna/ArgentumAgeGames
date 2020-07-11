@@ -10,6 +10,23 @@ package MyApp;
 
 use base 'Wx::App';
 
+# --- No changes below here
+#my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel --server=argentumage.gameplayer.club:23456";
+my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel";
+
+# Run game...
+sub RunGame
+{
+	# Get the arguments
+	my $CurServer = $_[0];
+	my $CurPort = $_[1];
+
+	my $SystemCommand = "$RunCommand --server=$CurServer:$CurPort";
+
+	PrintDebug("Running '$SystemCommand'\n");
+	system($SystemCommand);
+}
+
 # About Popup
 sub AboutPopup
 {
@@ -36,6 +53,11 @@ sub OnInit
 		my ($b, $evt) = @_;
 		$b->SetLabel('Clicked');
 		$b->Disable;
+	});
+	Wx::Event::EVT_BUTTON($buttonAbout, -1, sub {
+		my ($b, $evt) = @_;
+		$b->SetLabel('Clicked');
+		#$b->Disable;
 	});
 	Wx::Event::EVT_BUTTON($button2, -1, sub {
 		&Wx::wxTheApp->ExitMainLoop;
