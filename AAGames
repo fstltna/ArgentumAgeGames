@@ -14,6 +14,7 @@ my $DebugOn = "true";
 
 # --- No changes below here
 my $VersionNumber = "1.0.0";
+my $MyWxInfo = "";
 
 #my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel --server=argentumage.gameplayer.club:23456";
 my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel";
@@ -56,6 +57,27 @@ sub RunGame
 sub AboutPopup
 {
 	PrintDebug("About to open the About popup");
+	my $self = $MyWxInfo;
+
+	my $frame = wxPerl::Frame->new(undef, 'About Argentum Age');
+	$frame->SetMinSize([320,160]);
+	my $sizer = Wx::BoxSizer->new(&Wx::wxVERTICAL);
+
+	my $buttonAbout = wxPerl::Button->new($frame, 'About');
+	$sizer->Add($buttonAbout, 2, &Wx::wxEXPAND);
+	my $buttonDone = wxPerl::Button->new($frame, 'Done');
+	$sizer->Add($buttonDone, 1, &Wx::wxEXPAND);
+	Wx::Event::EVT_BUTTON($buttonAbout, -1, sub {
+		my ($b, $evt) = @_;
+		PrintDebug "Displaying About Field";
+	});
+	Wx::Event::EVT_BUTTON($buttonDone, -1, sub {
+		&Wx::wxTheApp->ExitMainLoop;
+	});
+
+	$frame->SetSizer($sizer);
+	$frame->Show;
+	$frame->Close;
 }
 
 # Main Init
@@ -63,6 +85,7 @@ sub OnInit
 {
 	my $self = shift;
 
+	$MyWxInfo = $self;
 	my $frame = wxPerl::Frame->new(undef, 'Argentum Age Games');
 	$frame->SetMinSize([320,160]);
 	my $sizer = Wx::BoxSizer->new(&Wx::wxVERTICAL);
