@@ -15,9 +15,18 @@ my $DebugOn = "true";
 # --- No changes below here
 my $VersionNumber = "1.0.0";
 my $MyWxInfo = "";
+my $myhome = $ENV{HOME};
+my $GameDir = "$myhome/.aagames";
 
 #my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel --server=argentumage.gameplayer.club:23456";
 my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel";
+
+# If storage folder doesn't exist, create it
+if (! -d $GameDir)
+{
+	PrintDebug("Creating Directory '$GameDir'");
+	mkdir $GameDir;
+}
 
 # Print debug info
 sub PrintDebug
@@ -63,13 +72,15 @@ sub AboutPopup
 	$frame->SetMinSize([320,160]);
 	my $sizer = Wx::BoxSizer->new(&Wx::wxVERTICAL);
 
+	my $aboutText = wxPerl::TextEntry->new($frame, 'About');
+	$sizer->Add($aboutText);
 	my $buttonAbout = wxPerl::Button->new($frame, 'About');
 	$sizer->Add($buttonAbout, 2, &Wx::wxEXPAND);
 	my $buttonDone = wxPerl::Button->new($frame, 'Done');
 	$sizer->Add($buttonDone, 1, &Wx::wxEXPAND);
 	Wx::Event::EVT_BUTTON($buttonAbout, -1, sub {
 		my ($b, $evt) = @_;
-		PrintDebug "Displaying About Field";
+		PrintDebug("Displaying About Field");
 	});
 	Wx::Event::EVT_BUTTON($buttonDone, -1, sub {
 		$frame->Close;
