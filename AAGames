@@ -21,6 +21,10 @@ my $GameDir = "$myhome/.aagames";
 my $GameServersFile = "$GameDir/GameServers.csv";
 my $NumServers = 0;
 
+my @ServerList = ();
+my %ServerHost;
+my %ServerPort;
+
 #my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel --server=argentumage.gameplayer.club:23456";
 my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel";
 
@@ -49,8 +53,15 @@ while(my $line = <$GameListFH>)
 	PrintDebug("Reading '$line' from server file");
 	if ($csv->parse($line))
 	{
-		my @fields = $csv->fields();
+		#my @fields = $csv->fields();
+		my ($ServerName, $ServerHostName, $ServerHostPort)  = $csv->fields();
 		$NumServers++;
+		print "Server name: $ServerName\n";
+		print "Server host: $ServerHostName\n";
+		print "Server port: $ServerHostPort\n";
+		push(@ServerList, $ServerName);
+		$ServerHost{$ServerName} = $ServerHostName;
+		$ServerPort{$ServerName} = $ServerHostPort;
 	}
 	else
 	{
