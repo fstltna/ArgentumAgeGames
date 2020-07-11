@@ -5,11 +5,12 @@ use strict;
 
 use Wx;
 use wxPerl::Constructors;
+use Text::CSV;
+my $csv = Text::CSV->new({ sep_char => ',' });
 
 package MyApp;
 
 use base 'Wx::App';
-
 my $DebugOn = "true";
 
 # --- No changes below here
@@ -18,6 +19,7 @@ my $MyWxInfo = "";
 my $myhome = $ENV{HOME};
 my $GameDir = "$myhome/.aagames";
 my $GameServersFile = "$GameDir/GameServers.csv";
+my $NumServers = 0;
 
 #my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel --server=argentumage.gameplayer.club:23456";
 my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel";
@@ -33,12 +35,30 @@ if (! -d $GameDir)
 if (! -f $GameServersFile)
 {
 	PrintDebug("Creating Servers file '$GameServersFile'");
-	system ("touch $GameServersFile");
+#	system ("touch $GameServersFile");
+	open(my $GameListOutputFH, '>', $GameServersFile) || die("Could not open $GameServersFile for writing");
+	print ($GameListOutputFH "servername,serverhost,serverport");
+	close($GameListOutputFH);
 }
 
+# Open up the server list
 open(my $GameListFH, '<', $GameServersFile) || die("Could not open $GameServersFile");
-
+while(my $line = <$GameListFH>)
+{
+	chomp($line);
+	PrintDebug("Reading '$line' from server file");
+	if ($csv->parse($line))
+	{
+		my @fields = $csv->fields();
+		$NumServers++;
+	}
+	else
+	{
+		die("Line '$line' could not be processsed");
+	}
+}
 close($GameListFH);
+print ("Read in $NumServers servers\n");
 
 # Print debug info
 sub PrintDebug
