@@ -27,9 +27,16 @@ sub PrintDebug
 	}
 }
 
+# Sync the list of servers
+sub SyncServerList
+{
+	PrintDebug("About to sync game server list");
+}
+
 # Display list of games
 sub DisplayGameList
 {
+	PrintDebug("About to display game server list");
 }
 
 # Run game...
@@ -41,7 +48,7 @@ sub RunGame
 
 	my $SystemCommand = "$RunCommand --server=$CurServer:$CurPort";
 
-	PrintDebug("Running '$SystemCommand'\n");
+	PrintDebug("Running '$SystemCommand'");
 	system($SystemCommand);
 }
 
@@ -80,6 +87,13 @@ sub OnInit
 		$b->SetLabel('Clicked');
 		$b->Disable;
 		AboutPopup();
+		$b->Enable;
+	});
+	Wx::Event::EVT_BUTTON($buttonSync, -1, sub {
+		my ($b, $evt) = @_;
+		$b->SetLabel('Clicked');
+		$b->Disable;
+		SyncServerList();
 		$b->Enable;
 	});
 	Wx::Event::EVT_BUTTON($button2, -1, sub {
