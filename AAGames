@@ -91,12 +91,33 @@ sub PrintDebug
 sub SyncServerList
 {
 	PrintDebug("About to sync game server list");
+	my $self = $MyWxInfo;
+
+	my $frame = wxPerl::Frame->new(undef, 'About Argentum Age', size => [640, 480], position => [320, 320]);
+	$frame->SetMinSize([320,160]);
+	my $sizer = Wx::BoxSizer->new(&Wx::wxVERTICAL);
+
+	my $AboutTextBefore = "This is a game launcher for Argentum Age. It helps you to find games to play.
+";
+	my $aboutText = wxPerl::StaticText->new($frame, $AboutTextBefore);
+	$sizer->Add($aboutText);
+	my $buttonDone = wxPerl::Button->new($frame, 'Done');
+	$sizer->Add($buttonDone, 1, &Wx::wxEXPAND);
+	Wx::Event::EVT_BUTTON($buttonDone, -1, sub {
+		$InSyncList = 0;
+		$frame->Close;
+	});
+
+	$frame->SetSizer($sizer);
+	$frame->Show;
 }
 
 # Display list of games
 sub DisplayGameList
 {
 	PrintDebug("About to display game server list");
+	$InGameList = 0;
+
 }
 
 # Run game...
@@ -180,10 +201,14 @@ sub OnInit
 	$sizer->Add($buttonQuit, 1, &Wx::wxEXPAND);
 	Wx::Event::EVT_BUTTON($buttonGames, -1, sub {
 		my ($b, $evt) = @_;
-		$b->SetLabel('Clicked');
-		$b->Disable;
-		DisplayGameList();
-		$b->Enable;
+		#$b->SetLabel('Clicked');
+		if ($InGameList == 0)
+		{
+			$InGameList = -1;
+			$b->Disable;
+			DisplayGameList();
+			$b->Enable;
+		}
 	});
 	Wx::Event::EVT_BUTTON($buttonAbout, -1, sub {
 		my ($b, $evt) = @_;
@@ -198,10 +223,14 @@ sub OnInit
 	});
 	Wx::Event::EVT_BUTTON($buttonSync, -1, sub {
 		my ($b, $evt) = @_;
-		$b->SetLabel('Clicked');
-		$b->Disable;
-		SyncServerList();
-		$b->Enable;
+		#$b->SetLabel('Clicked');
+		if ($InSyncList == 0)
+		{
+			$InSyncList = -1;
+			$b->Disable;
+			SyncServerList();
+			$b->Enable;
+		}
 	});
 	Wx::Event::EVT_BUTTON($buttonQuit, -1, sub {
 		&Wx::wxTheApp->ExitMainLoop;
