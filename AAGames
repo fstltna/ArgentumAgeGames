@@ -72,12 +72,11 @@ sub AboutPopup
 		PrintDebug "Displaying About Field";
 	});
 	Wx::Event::EVT_BUTTON($buttonDone, -1, sub {
-		&Wx::wxTheApp->ExitMainLoop;
+		$frame->Close;
 	});
 
 	$frame->SetSizer($sizer);
 	$frame->Show;
-	$frame->Close;
 }
 
 # Main Init
