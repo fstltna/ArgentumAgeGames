@@ -67,15 +67,15 @@ sub OnInit
 	$frame->SetMinSize([320,160]);
 	my $sizer = Wx::BoxSizer->new(&Wx::wxVERTICAL);
 
-	my $button = wxPerl::Button->new($frame, 'Games');
-	$sizer->Add($button, 2, &Wx::wxEXPAND);
+	my $buttonGames = wxPerl::Button->new($frame, 'Games');
+	$sizer->Add($buttonGames, 2, &Wx::wxEXPAND);
 	my $buttonSync = wxPerl::Button->new($frame, 'Sync');
 	$sizer->Add($buttonSync, 2, &Wx::wxEXPAND);
 	my $buttonAbout = wxPerl::Button->new($frame, 'About');
 	$sizer->Add($buttonAbout, 2, &Wx::wxEXPAND);
-	my $button2 = wxPerl::Button->new($frame, 'Quit');
-	$sizer->Add($button2, 1, &Wx::wxEXPAND);
-	Wx::Event::EVT_BUTTON($button, -1, sub {
+	my $buttonQuit = wxPerl::Button->new($frame, 'Quit');
+	$sizer->Add($buttonQuit, 1, &Wx::wxEXPAND);
+	Wx::Event::EVT_BUTTON($buttonGames, -1, sub {
 		my ($b, $evt) = @_;
 		$b->SetLabel('Clicked');
 		$b->Disable;
@@ -96,7 +96,7 @@ sub OnInit
 		SyncServerList();
 		$b->Enable;
 	});
-	Wx::Event::EVT_BUTTON($button2, -1, sub {
+	Wx::Event::EVT_BUTTON($buttonQuit, -1, sub {
 		&Wx::wxTheApp->ExitMainLoop;
 	});
 
