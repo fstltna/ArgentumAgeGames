@@ -17,6 +17,7 @@ my $VersionNumber = "1.0.0";
 my $MyWxInfo = "";
 my $myhome = $ENV{HOME};
 my $GameDir = "$myhome/.aagames";
+my $GameServersFile = "$GameDir/GameServers.csv";
 
 #my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel --server=argentumage.gameplayer.club:23456";
 my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel";
@@ -26,6 +27,13 @@ if (! -d $GameDir)
 {
 	PrintDebug("Creating Directory '$GameDir'");
 	mkdir $GameDir;
+}
+
+# If storage folder doesn't exist, create it
+if (! -f $GameServersFile)
+{
+	PrintDebug("Creating Servers file '$GameServersFile'");
+	system ("touch $GameServersFile");
 }
 
 # Print debug info
