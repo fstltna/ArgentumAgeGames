@@ -56,9 +56,9 @@ while(my $line = <$GameListFH>)
 		#my @fields = $csv->fields();
 		my ($ServerName, $ServerHostName, $ServerHostPort)  = $csv->fields();
 		$NumServers++;
-		PrintDebug "Server name: $ServerName";
-		PrintDebug "Server host: $ServerHostName";
-		PrintDebug "Server port: $ServerHostPort";
+		PrintDebug("Server name: $ServerName");
+		PrintDebug("Server host: $ServerHostName");
+		PrintDebug("Server port: $ServerHostPort");
 		push(@ServerList, $ServerName);
 		$ServerHost{$ServerName} = $ServerHostName;
 		$ServerPort{$ServerName} = $ServerHostPort;
