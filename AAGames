@@ -26,6 +26,8 @@ my %ServerHost;
 my %ServerPort;
 
 my $InAbout = 0;
+my $InGameList = 0;
+my $InSyncList = 0;
 
 #my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel --server=argentumage.gameplayer.club:23456";
 my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel";
