@@ -59,7 +59,7 @@ sub AboutPopup
 	PrintDebug("About to open the About popup");
 	my $self = $MyWxInfo;
 
-	my $frame = wxPerl::Frame->new(undef, 'About Argentum Age');
+	my $frame = wxPerl::Frame->new(undef, 'About Argentum Age', size => [640, 480], position => [320, 320]);
 	$frame->SetMinSize([320,160]);
 	my $sizer = Wx::BoxSizer->new(&Wx::wxVERTICAL);
 
