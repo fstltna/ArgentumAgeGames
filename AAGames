@@ -127,6 +127,18 @@ This is a game launcher for Argentum Age. It helps you to find games to play.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 ";
 	my $aboutText = wxPerl::StaticText->new($frame, $AboutTextBefore);
 	$sizer->Add($aboutText);
