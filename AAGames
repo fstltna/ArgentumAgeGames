@@ -115,10 +115,21 @@ sub AboutPopup
 	$frame->SetMinSize([320,160]);
 	my $sizer = Wx::BoxSizer->new(&Wx::wxVERTICAL);
 
-	my $aboutText = wxPerl::StaticText->new($frame, 'About');
+	my $AboutTextBefore = "Welcome to Argentum Age Game Launcher - Version $VersionNumber
+
+This is a game launcher for Argentum Age. It helps you to find games to play.
+
+
+
+
+
+
+
+
+
+";
+	my $aboutText = wxPerl::StaticText->new($frame, $AboutTextBefore);
 	$sizer->Add($aboutText);
-#	my $buttonAbout = wxPerl::Button->new($frame, 'About');
-#	$sizer->Add($buttonAbout, 2, &Wx::wxEXPAND);
 	my $buttonDone = wxPerl::Button->new($frame, 'Done');
 	$sizer->Add($buttonDone, 1, &Wx::wxEXPAND);
 	Wx::Event::EVT_BUTTON($buttonDone, -1, sub {
