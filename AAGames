@@ -58,7 +58,7 @@ while(my $line = <$GameListFH>)
 	}
 }
 close($GameListFH);
-print ("Read in $NumServers servers\n");
+PrintDebug ("Read in $NumServers servers\n");
 
 # Print debug info
 sub PrintDebug
