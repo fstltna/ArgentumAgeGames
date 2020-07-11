@@ -14,6 +14,11 @@ use base 'Wx::App';
 #my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel --server=argentumage.gameplayer.club:23456";
 my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel";
 
+# Display list of games
+sub DisplayGameList
+{
+}
+
 # Run game...
 sub RunGame
 {
@@ -53,6 +58,8 @@ sub OnInit
 		my ($b, $evt) = @_;
 		$b->SetLabel('Clicked');
 		$b->Disable;
+		DisplayGameList();
+		$b->Enable;
 	});
 	Wx::Event::EVT_BUTTON($buttonAbout, -1, sub {
 		my ($b, $evt) = @_;
