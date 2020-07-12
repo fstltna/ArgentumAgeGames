@@ -127,8 +127,11 @@ Click the 'Done' button when done
 
 
 ";
-	# Download the server list file
-	system($Wget);
+	# Remove server list if exists
+	if (-f "GameServers.csv")
+	{
+		unlink("GameServers.csv");
+	}
 
 	my $aboutText = wxPerl::StaticText->new($frame, $AboutTextBefore);
 	$sizer->Add($aboutText);
@@ -141,7 +144,8 @@ Click the 'Done' button when done
 
 	$frame->SetSizer($sizer);
 	$frame->Show;
-	system($Server_List_URL);
+	# Download the server list file
+	system($Wget);
 }
 
 # Display list of games
