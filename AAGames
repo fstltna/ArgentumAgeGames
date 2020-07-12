@@ -138,8 +138,7 @@ Click the 'Done' button when done
 	my $buttonDone = wxPerl::Button->new($frame, 'Done');
 	$sizer->Add($buttonDone, 1, &Wx::wxEXPAND);
 	Wx::Event::EVT_BUTTON($buttonDone, -1, sub {
-		$InSyncList = 0;
-		$frame->Close;
+		exec("AAGames");
 	});
 
 	$frame->SetSizer($sizer);
