@@ -6,6 +6,7 @@ This tool displays a list of servers to choose from to make it easier to find ga
 
 1. Copy **AAGames** to somewhere in your path - I suggest adding the directory you extracted this into your path so that you can just do "git pull" to download updates to this tool.
 2. Run this:
+
 	cpan -i Wx
 	cpan -i wxPerl::Constructors
 	cpan -i Text::CSV
