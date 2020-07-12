@@ -18,7 +18,7 @@ my $VersionNumber = "1.0.0";
 my $MyWxInfo = "";
 my $myhome = $ENV{HOME};
 my $GameDir = "$myhome/.aagames";
-my $GameServersFile = "$GameDir/GameServers.csv";
+my $GameServersFile = "GameServers.csv";
 my $NumServers = 0;
 
 my @ServerList = ();
@@ -29,6 +29,9 @@ my $InAbout = 0;
 my $InGameList = 0;
 my $InSyncList = 0;
 
+my $Server_List_URL = "http://argentumage.gameplayer.club/GameServers.csv";
+my $Wget = "wget -q $Server_List_URL";
+
 #my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel --server=argentumage.gameplayer.club:23456";
 my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel";
 
@@ -38,6 +41,7 @@ if (! -d $GameDir)
 	PrintDebug("Creating Directory '$GameDir'");
 	mkdir $GameDir || die("Can't create the '$GameDir' folder");;
 }
+chdir($GameDir);
 
 # If storage folder doesn't exist, create it
 if (! -f $GameServersFile)
@@ -91,14 +95,41 @@ sub PrintDebug
 sub SyncServerList
 {
 	PrintDebug("About to sync game server list");
+
 	my $self = $MyWxInfo;
 
 	my $frame = wxPerl::Frame->new(undef, 'About Argentum Age', size => [640, 480], position => [320, 320]);
 	$frame->SetMinSize([320,160]);
 	my $sizer = Wx::BoxSizer->new(&Wx::wxVERTICAL);
 
-	my $AboutTextBefore = "This is a game launcher for Argentum Age. It helps you to find games to play.
+	my $AboutTextBefore = "Synchronizing server list
+
+Click the 'Done' button when done
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ";
+	# Download the server list file
+	system($Wget);
+
 	my $aboutText = wxPerl::StaticText->new($frame, $AboutTextBefore);
 	$sizer->Add($aboutText);
 	my $buttonDone = wxPerl::Button->new($frame, 'Done');
@@ -110,6 +141,7 @@ sub SyncServerList
 
 	$frame->SetSizer($sizer);
 	$frame->Show;
+	system($Server_List_URL);
 }
 
 # Display list of games
