@@ -8,9 +8,9 @@ Copy **AAGames** to somewhere in your path - I suggest adding the directory you 
 
 Run this:
 
-- cpan -i Wx
-- cpan -i wxPerl::Constructors
-- cpan -i Text::CSV
+- sudo cpan -i Wx
+- sudo cpan -i wxPerl::Constructors
+- sudo cpan -i Text::CSV
 	
 ---
 
