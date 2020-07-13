@@ -61,7 +61,6 @@ while(my $line = <$GameListFH>)
 	PrintDebug("Reading '$line' from server file");
 	if ($csv->parse($line))
 	{
-		#my @fields = $csv->fields();
 		my ($ServerName, $ServerHostName, $ServerHostPort)  = $csv->fields();
 		if ($ServerName ne "servername")
 		{
@@ -81,6 +80,8 @@ while(my $line = <$GameListFH>)
 }
 close($GameListFH);
 PrintDebug ("Read in $NumServers servers\n");
+
+@ServerList = sort { lc($a) cmp lc($b) } @ServerList;
 
 # Print debug info
 sub PrintDebug
