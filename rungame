@@ -1,7 +1,5 @@
 #!/bin/bash
-cd /home/marisa/.local/share/Steam/steamapps/common/Argentum\ Age
-#export LD_LIBRARY_PATH=./runtime:$LD_LIBRARY_PATH
+cd ~/.local/share/Steam/steamapps/common/Argentum\ Age
 export LD_LIBRARY_PATH=./runtime
 
-#./anura --module=citadel --server=argentumage.gameplayer.club:23456
 ./anura --module=citadel "$@"

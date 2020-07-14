@@ -32,8 +32,6 @@ my $InSyncList = 0;
 my $Server_List_URL = "http://argentumage.gameplayer.club/GameServers.csv";
 my $Wget = "wget -q $Server_List_URL";
 
-my $RunCommand = "./anura --module=citadel";
-
 # If storage folder doesn't exist, create it
 if (! -d $GameDir)
 {
@@ -154,17 +152,16 @@ sub RunGame
 	my $CurServer = $_[0];
 	my $CurPort = $_[1];
 	my $MyChDir = "$myhome/.local/share/Steam/steamapps/common/Argentum\ Age";
-	my $SystemCommand = "$RunCommand --server=$CurServer:$CurPort";
 
 	PrintDebug("changing directory to '$MyChDir'");
 	chdir("$MyChDir");
 	$ENV{'LD_LIBRARY_PATH'} = "./runtime:$ENV{'LD_LIBRARY_PATH'}";
 
-	PrintDebug("Running '$SystemCommand'");
+	PrintDebug("Running \"./rungame --server=$CurServer:$CurPort\"");
 	my $returnCode = system("./rungame --server=$CurServer:$CurPort");
 	if ( $returnCode != 0 )  # ZZZ
 	{
-		die("Failed executing '$SystemCommand'");
+		die("Failed executing game itself");
 	}
 	chdir($GameDir);
 	PrintDebug("Game finished");
