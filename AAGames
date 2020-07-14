@@ -153,7 +153,27 @@ sub DisplayGameList
 {
 	PrintDebug("About to display game server list");
 	$InGameList = 0;
+	my $self = $MyWxInfo;
 
+	my $frame = wxPerl::Frame->new(undef, 'Active Argentum Age Games', size => [640, 480], position => [320, 320]);
+	$frame->SetMinSize([320,160]);
+	my $sizer = Wx::BoxSizer->new(&Wx::wxVERTICAL);
+
+	my $AboutTextBefore = "Welcome to Argentum Age Game Launcher - Version $VersionNumber
+
+This is a game launcher for Argentum Age. It helps you to find games to play.
+";
+	my $aboutText = wxPerl::StaticText->new($frame, $AboutTextBefore);
+	$sizer->Add($aboutText);
+	my $buttonDone = wxPerl::Button->new($frame, 'Done');
+	$sizer->Add($buttonDone, 1, &Wx::wxEXPAND);
+	Wx::Event::EVT_BUTTON($buttonDone, -1, sub {
+		$InAbout = 0;
+		$frame->Close;
+	});
+
+	$frame->SetSizer($sizer);
+	$frame->Show;
 }
 
 # Run game...
