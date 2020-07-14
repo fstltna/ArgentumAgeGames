@@ -32,7 +32,7 @@ my $InSyncList = 0;
 my $Server_List_URL = "http://argentumage.gameplayer.club/GameServers.csv";
 my $Wget = "wget -q $Server_List_URL";
 
-my $RunCommand = '~/.local/share/Steam/steamapps/common/Argentum Age/anura.sh --module=citadel';
+my $RunCommand = "$myhome/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel";
 
 # If storage folder doesn't exist, create it
 if (! -d $GameDir)
@@ -157,7 +157,7 @@ sub RunGame
 	my $SystemCommand = "$RunCommand --server=$CurServer:$CurPort";
 
 	PrintDebug("Running '$SystemCommand'");
-	system($SystemCommand);
+	system('$SystemCommand');
 }
 
 # Display list of games
