@@ -1,4 +1,4 @@
-# Argentum Age Game List (1.0.0)
+# Argentum Age Game List (1.0.1)
 
 This tool displays a list of servers to choose from to make it easier to find games to play - Official support sites: [Official Sourceforge Repo](https://sourceforge.net/projects/argentum-age-game-list) - [Official Forum](https://argentumage.gameplayer.club/index.php/forum/argentum-age-utilities)
 
