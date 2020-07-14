@@ -16,6 +16,8 @@ Then copy the file **rungame** to "**~/.local/share/Steam/steamapps/common/Argen
 
 You should now be able to run AAgames
 
+If you want to add your server to the list or remove it from the list go here: https://argentumage.gameplayer.club/index.php/argentum-age-links/games/argentum-age/server-list
+
 ---
 
 Get more info at https://argentumage.gameplayer.club/index.php/forum/argentum-age-utilities and we provide Argentum Age hosting for $14/month with first month free. Cancel before the end of the month and pay nothing.
