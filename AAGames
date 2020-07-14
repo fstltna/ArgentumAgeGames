@@ -32,8 +32,7 @@ my $InSyncList = 0;
 my $Server_List_URL = "http://argentumage.gameplayer.club/GameServers.csv";
 my $Wget = "wget -q $Server_List_URL";
 
-#my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel --server=argentumage.gameplayer.club:23456";
-my $RunCommand = "~/.local/share/Steam/steamapps/common/Argentum\ Age/anura.sh --module=citadel";
+my $RunCommand = '~/.local/share/Steam/steamapps/common/Argentum Age/anura.sh --module=citadel';
 
 # If storage folder doesn't exist, create it
 if (! -d $GameDir)
@@ -148,34 +147,6 @@ Click the 'Done' button when done
 	system($Wget);
 }
 
-# Display list of games
-sub DisplayGameList
-{
-	PrintDebug("About to display game server list");
-	$InGameList = 0;
-	my $self = $MyWxInfo;
-
-	my $frame = wxPerl::Frame->new(undef, 'Active Argentum Age Games', size => [640, 480], position => [320, 320]);
-	$frame->SetMinSize([320,160]);
-	my $sizer = Wx::BoxSizer->new(&Wx::wxVERTICAL);
-
-	my $AboutTextBefore = "Welcome to Argentum Age Game Launcher - Version $VersionNumber
-
-This is a game launcher for Argentum Age. It helps you to find games to play.
-";
-	my $aboutText = wxPerl::StaticText->new($frame, $AboutTextBefore);
-	$sizer->Add($aboutText);
-	my $buttonDone = wxPerl::Button->new($frame, 'Done');
-	$sizer->Add($buttonDone, 1, &Wx::wxEXPAND);
-	Wx::Event::EVT_BUTTON($buttonDone, -1, sub {
-		$InAbout = 0;
-		$frame->Close;
-	});
-
-	$frame->SetSizer($sizer);
-	$frame->Show;
-}
-
 # Run game...
 sub RunGame
 {
@@ -187,6 +158,98 @@ sub RunGame
 
 	PrintDebug("Running '$SystemCommand'");
 	system($SystemCommand);
+}
+
+# Display list of games
+sub DisplayGameList
+{
+	# Init buttons
+	my $buttonOne;
+	my $buttonTwo;
+	my $buttonThree;
+	my $buttonFour;
+	my $buttonFive;
+	my $buttonSix;
+	my $buttonSeven;
+	my $buttonEight;
+	my $buttonNine;
+	my $buttonTen;
+	PrintDebug("About to display game server list");
+	$InGameList = 0;
+	my $self = $MyWxInfo;
+
+	my $frame = wxPerl::Frame->new(undef, 'Choose your Argentum Age Game', size => [640, 480], position => [320, 320]);
+	$frame->SetMinSize([320,160]);
+	my $sizer = Wx::BoxSizer->new(&Wx::wxVERTICAL);
+
+	my $AboutTextBefore = "Select a game from the list below";
+	my $aboutText = wxPerl::StaticText->new($frame, $AboutTextBefore);
+	$sizer->Add($aboutText);
+	if ($NumServers > 0)
+	{
+		$buttonOne = wxPerl::Button->new($frame, @ServerList[0]);
+		$sizer->Add($buttonOne, 1, &Wx::wxEXPAND);
+	}
+	if ($NumServers > 1)
+	{
+		$buttonTwo = wxPerl::Button->new($frame, @ServerList[1]);
+		$sizer->Add($buttonTwo, 1, &Wx::wxEXPAND);
+	}
+	if ($NumServers > 2)
+	{
+		$buttonThree = wxPerl::Button->new($frame, @ServerList[2]);
+		$sizer->Add($buttonThree, 1, &Wx::wxEXPAND);
+	}
+	if ($NumServers > 3)
+	{
+		$buttonFour = wxPerl::Button->new($frame, @ServerList[3]);
+		$sizer->Add($buttonFour, 1, &Wx::wxEXPAND);
+	}
+	if ($NumServers > 4)
+	{
+		$buttonFive = wxPerl::Button->new($frame, @ServerList[4]);
+		$sizer->Add($buttonFive, 1, &Wx::wxEXPAND);
+	}
+	if ($NumServers > 5)
+	{
+		$buttonSix = wxPerl::Button->new($frame, @ServerList[5]);
+		$sizer->Add($buttonSix, 1, &Wx::wxEXPAND);
+	}
+	if ($NumServers > 6)
+	{
+		$buttonSeven = wxPerl::Button->new($frame, @ServerList[6]);
+		$sizer->Add($buttonSeven, 1, &Wx::wxEXPAND);
+	}
+	if ($NumServers > 7)
+	{
+		$buttonEight = wxPerl::Button->new($frame, @ServerList[7]);
+		$sizer->Add($buttonEight, 1, &Wx::wxEXPAND);
+	}
+	if ($NumServers > 8)
+	{
+		$buttonNine = wxPerl::Button->new($frame, @ServerList[8]);
+		$sizer->Add($buttonNine, 1, &Wx::wxEXPAND);
+	}
+	if ($NumServers > 9)
+	{
+		$buttonTen = wxPerl::Button->new($frame, @ServerList[9]);
+		$sizer->Add($buttonTen, 1, &Wx::wxEXPAND);
+	}
+	my $buttonDone = wxPerl::Button->new($frame, 'Done');
+	$sizer->Add($buttonDone, 1, &Wx::wxEXPAND);
+
+	# Button Events
+	Wx::Event::EVT_BUTTON($buttonOne, -1, sub {
+		# ZZZ
+		RunGame($ServerHost{@ServerList[0]}, $ServerPort{@ServerList[0]});
+	});
+	Wx::Event::EVT_BUTTON($buttonDone, -1, sub {
+		$InGameList = 0;
+		$frame->Close;
+	});
+
+	$frame->SetSizer($sizer);
+	$frame->Show;
 }
 
 # About Popup
