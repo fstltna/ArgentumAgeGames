@@ -239,10 +239,76 @@ sub DisplayGameList
 	$sizer->Add($buttonDone, 1, &Wx::wxEXPAND);
 
 	# Button Events
-	Wx::Event::EVT_BUTTON($buttonOne, -1, sub {
-		# ZZZ
-		RunGame($ServerHost{@ServerList[0]}, $ServerPort{@ServerList[0]});
-	});
+	if ($NumServers > 0)
+	{
+		Wx::Event::EVT_BUTTON($buttonOne, -1, sub {
+			# ZZZ
+			RunGame($ServerHost{@ServerList[0]}, $ServerPort{@ServerList[0]});
+		});
+	}
+	if ($NumServers > 1)
+	{
+		Wx::Event::EVT_BUTTON($buttonTwo, -1, sub {
+			# ZZZ
+			RunGame($ServerHost{@ServerList[1]}, $ServerPort{@ServerList[1]});
+		});
+	}
+	if ($NumServers > 2)
+	{
+		Wx::Event::EVT_BUTTON($buttonThree, -1, sub {
+			# ZZZ
+			RunGame($ServerHost{@ServerList[2]}, $ServerPort{@ServerList[2]});
+		});
+	}
+	if ($NumServers > 3)
+	{
+		Wx::Event::EVT_BUTTON($buttonFour, -1, sub {
+			# ZZZ
+			RunGame($ServerHost{@ServerList[3]}, $ServerPort{@ServerList[3]});
+		});
+	}
+	if ($NumServers > 4)
+	{
+		Wx::Event::EVT_BUTTON($buttonFive, -1, sub {
+			# ZZZ
+			RunGame($ServerHost{@ServerList[4]}, $ServerPort{@ServerList[4]});
+		});
+	}
+	if ($NumServers > 5)
+	{
+		Wx::Event::EVT_BUTTON($buttonSix, -1, sub {
+			# ZZZ
+			RunGame($ServerHost{@ServerList[5]}, $ServerPort{@ServerList[5]});
+		});
+	}
+	if ($NumServers > 6)
+	{
+		Wx::Event::EVT_BUTTON($buttonSeven, -1, sub {
+			# ZZZ
+			RunGame($ServerHost{@ServerList[6]}, $ServerPort{@ServerList[6]});
+		});
+	}
+	if ($NumServers > 7)
+	{
+		Wx::Event::EVT_BUTTON($buttonEight, -1, sub {
+			# ZZZ
+			RunGame($ServerHost{@ServerList[7]}, $ServerPort{@ServerList[7]});
+		});
+	}
+	if ($NumServers > 8)
+	{
+		Wx::Event::EVT_BUTTON($buttonNine, -1, sub {
+			# ZZZ
+			RunGame($ServerHost{@ServerList[8]}, $ServerPort{@ServerList[8]});
+		});
+	}
+	if ($NumServers > 9)
+	{
+		Wx::Event::EVT_BUTTON($buttonTen, -1, sub {
+			# ZZZ
+			RunGame($ServerHost{@ServerList[9]}, $ServerPort{@ServerList[9]});
+		});
+	}
 	Wx::Event::EVT_BUTTON($buttonDone, -1, sub {
 		$InGameList = 0;
 		$frame->Close;
