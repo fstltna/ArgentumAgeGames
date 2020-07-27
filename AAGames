@@ -14,7 +14,7 @@ use base 'Wx::App';
 my $DebugOn = "true";
 
 # --- No changes below here
-my $VersionNumber = "1.0.0";
+my $VersionNumber = "1.1.0";
 my $MyWxInfo = "";
 my $myhome = $ENV{HOME};
 my $GameDir = "$myhome/.aagames";
@@ -92,7 +92,7 @@ sub PrintDebug
 # Sync the list of servers
 sub SyncServerList
 {
-	PrintDebug("About to sync game server list");
+	PrintDebug("About to Download the game server list");
 
 	my $self = $MyWxInfo;
 
@@ -100,7 +100,7 @@ sub SyncServerList
 	$frame->SetMinSize([320,160]);
 	my $sizer = Wx::BoxSizer->new(&Wx::wxVERTICAL);
 
-	my $AboutTextBefore = "Synchronizing server list
+	my $AboutTextBefore = "Downloading server list
 
 Click the 'Done' button when done
 
@@ -375,7 +375,7 @@ sub OnInit
 
 	my $buttonGames = wxPerl::Button->new($frame, 'Games');
 	$sizer->Add($buttonGames, 2, &Wx::wxEXPAND);
-	my $buttonSync = wxPerl::Button->new($frame, 'Sync');
+	my $buttonSync = wxPerl::Button->new($frame, 'Download Servers List');
 	$sizer->Add($buttonSync, 2, &Wx::wxEXPAND);
 	my $buttonAbout = wxPerl::Button->new($frame, 'About');
 	$sizer->Add($buttonAbout, 2, &Wx::wxEXPAND);
